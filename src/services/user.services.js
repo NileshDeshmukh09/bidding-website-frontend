@@ -1,10 +1,13 @@
-import axiosInstance from './axios'; 
+import {axiosInstance} from '../axios/axios'
 
-export const getUser = async () => {
+export const createUser = async (data) => {
     try {
-      const response = await axiosInstance.get('/api/v1/users');
-      setData(response.data);
+      const response = await axiosInstance.post('/auth/register' , data );
+      return response;
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error('Error fetching data:', error.response.data);
+
+      return error.response.data;
     }
   };
+  
