@@ -8,7 +8,7 @@ const FrontendHome = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   if(!isLoggedIn){
-    return <Navigate to={"/signup"}/>
+    return <Navigate to={"/signup/select-user"}/>
   }
 
   return (
