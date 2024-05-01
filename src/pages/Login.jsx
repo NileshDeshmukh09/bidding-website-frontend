@@ -1,11 +1,9 @@
-// src/components/LoginForm.js
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../services/user.services"; // Assuming you have an auth service for logging in
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../services/user.services";
+import { useNavigate , Link } from "react-router-dom";
 import LoadingSpinner from "../common/Loading";
 import { setUser, setToken } from "../redux/slices/Authslice";
-import { Link } from "react-router-dom";
 import PrimaryButton from "../common/PrimaryButton";
 
 const Login = () => {
@@ -19,12 +17,21 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const userType = useSelector( state => state.user.userType);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate form fields
+    if (!formData.email || !formData.password) {
+      setError("Email and password are required.");
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await loginUser(formData);
@@ -36,10 +43,8 @@ const Login = () => {
         navigate("/");
       } else {
         setLoading(false);
-        setError(res.message);
+        setError(res.message || "Failed to log in.");
       }
-
-      console.log("res : ", res);
     } catch (error) {
       setLoading(false);
       setError("An error occurred while logging in.");
@@ -50,6 +55,7 @@ const Login = () => {
   return (
     <form className="max-w-sm mx-auto mt-8">
       <div className="mb-4">
+      <h1 className=" my-6 text-3xl text-center text-[#00B386]">{userType ==='CLIENT' ? `Login to hire talent` : `Login to find work for you`}</h1>
         <label htmlFor="email" className="block mb-2">
           Email
         </label>
@@ -78,9 +84,21 @@ const Login = () => {
         />
       </div>
       {error && <p className="text-red-500">{error}</p>}
-      <PrimaryButton onClick={handleSubmit} children={loading ? <LoadingSpinner /> : `Login`}/>
+      <PrimaryButton
+        onClick={handleSubmit}
+        children={loading ? <LoadingSpinner /> : `Login`}
+      />
 
-      <p>Create a New Account ?? <span><Link to={'/signup/select-user'} className="font-medium text-xl text-[#00B386] hover:underline">Signup</Link></span>
+      <p>
+        Create a New Account ?{" "}
+        <span>
+          <Link
+            to={"/signup/select-user"}
+            className="font-medium text-xl text-[#00B386] hover:underline"
+          >
+            Signup
+          </Link>
+        </span>
       </p>
     </form>
   );

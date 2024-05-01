@@ -1,4 +1,3 @@
-// src/components/SignupForm.js
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser } from "../services/user.services";
@@ -10,8 +9,8 @@ import PrimaryButton from "../common/PrimaryButton";
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userType = useSelector((state) => state.user.userType);
 
- const userType =  useSelector( state => state.user.userType)
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -26,9 +25,21 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate form fields
+    if (!formData.username || !formData.email || !formData.password) {
+      setError("All fields are required.");
+      return;
+    }
+
+    if (!isValidEmail(formData.email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
     setLoading(true);
     try {
-      const res = await createUser({...formData , userType});
+      const res = await createUser({ ...formData, userType });
 
       if (res.data && res.data.success) {
         setLoading(false);
@@ -37,10 +48,8 @@ const Signup = () => {
         navigate("/");
       } else {
         setLoading(false);
-        setError(res.message);
+        setError(res.message || "Failed to sign up.");
       }
-
-      console.log("res : ", res);
     } catch (error) {
       setLoading(false);
       setError("An error occurred while signing up.");
@@ -48,9 +57,19 @@ const Signup = () => {
     }
   };
 
+ 
+
+  // Helper function to validate email format
+  const isValidEmail = (email) => {
+    // Regular expression for basic email validation
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
   return (
-    <form  className="max-w-sm mx-auto mt-8">
+    <form className="max-w-sm mx-auto mt-8">
       <div className="mb-4">
+        <h1 className=" my-6 text-3xl text-center text-[#00B386]">{userType ==='CLIENT' ? `Signup to hire talent` : `Signup to find work for you`}</h1>
         <label htmlFor="username" className="block mb-2">
           Username
         </label>
@@ -93,11 +112,20 @@ const Signup = () => {
         />
       </div>
       {error && <p className="text-red-500">{error}</p>}
-      
 
-      <PrimaryButton onClick={handleSubmit} children={loading ? <LoadingSpinner /> : `Sign Up`}/>
+      <PrimaryButton
+        onClick={handleSubmit}
+        children={loading ? <LoadingSpinner /> : `Sign Up`}
+      />
 
-      <p>Already have an Account ? <span><Link to={'/login'} className="text-xl font-bold hover:underline">Sign In</Link></span></p>
+      <p>
+        Already have an Account ?{" "}
+        <span>
+          <Link to={"/login"} className="text-xl font-bold hover:underline">
+            Sign In
+          </Link>
+        </span>
+      </p>
     </form>
   );
 };

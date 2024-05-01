@@ -40,7 +40,7 @@ const SignupLanding = () => {
         </div>
 
         <div
-          className={`w-[200px]  py-6 px-5 rounded-lg border ${
+          className={`w-[200px]  py-6 px-5 rounded-lg border-2 ${
             userType === "FREELANCER" ? "border-[#00B386] text-[#00B386]" : "border-black-500 text-black-500"
           }`}
           onClick={() => handleUserTypeChange("FREELANCER")}
