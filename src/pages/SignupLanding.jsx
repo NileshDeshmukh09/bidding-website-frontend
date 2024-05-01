@@ -59,7 +59,7 @@ const SignupLanding = () => {
       </div>
 
       <div className="mt-4 flex justify-center flex-col items-center">
-      <PrimaryButton onClick={() => navigate("/Signup")} children={userType === "FREELANCER" ? "Join as Freelancer" : userType === "CLIENT" ? "Join as a Client" : "Create Account"}/>
+      <PrimaryButton onClick={() => navigate("/Signup")} children={userType === "FREELANCER" ? "Apply as a Freelancer" : userType === "CLIENT" ? "Join as a Client" : "Create Account"}/>
 
       <p>Already have an Account ? <span><Link to={'/login'} className="text-xl text-[#00B386] font-bold hover:underline">Sign In</Link></span></p>
       </div>
