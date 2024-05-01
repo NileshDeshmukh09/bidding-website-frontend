@@ -1,15 +1,18 @@
 // src/components/SignupForm.js
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { signUp } from '../store/actions/authActions';
 import { createUser } from "../services/user.services";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../common/Loading";
-import { loginSuccess, setToken } from "../redux/slices/user.slice";
+import { setUser, setToken } from "../redux/slices/user.slice";
+import PrimaryButton from "../common/PrimaryButton";
 
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+ const userType =  useSelector( state => state.user.userType)
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -26,13 +29,13 @@ const Signup = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await createUser(formData);
+      const res = await createUser({...formData , userType});
 
       if (res.data && res.data.success) {
         setLoading(false);
-        dispatch(loginSuccess(res.data.user));
+        dispatch(setUser(res.data.user));
         dispatch(setToken(res.data.accessToken));
-        navigate("/about");
+        navigate("/");
       } else {
         setLoading(false);
         setError(res.message);
@@ -47,7 +50,7 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-sm mx-auto mt-8">
+    <form  className="max-w-sm mx-auto mt-8">
       <div className="mb-4">
         <label htmlFor="username" className="block mb-2">
           Username
@@ -91,12 +94,11 @@ const Signup = () => {
         />
       </div>
       {error && <p className="text-red-500">{error}</p>}
-      <button
-        type="submit"
-        className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded"
-      >
-        {loading ? <LoadingSpinner /> : `Sign Up`}
-      </button>
+      
+
+      <PrimaryButton onClick={handleSubmit} children={loading ? <LoadingSpinner /> : `Sign Up`}/>
+
+      <p>Already have an Account ? <span><Link to={'/login'} className="text-xl font-bold hover:underline">Sign In</Link></span></p>
     </form>
   );
 };
