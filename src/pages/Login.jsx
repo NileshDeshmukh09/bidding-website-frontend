@@ -25,14 +25,15 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     // Validate form fields
     if (!formData.email || !formData.password) {
+      setLoading(false);
       setError("Email and password are required.");
       return;
     }
 
-    setLoading(true);
     try {
       const res = await loginUser(formData);
 

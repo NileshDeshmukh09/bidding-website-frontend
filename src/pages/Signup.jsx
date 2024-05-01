@@ -25,19 +25,21 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     // Validate form fields
     if (!formData.username || !formData.email || !formData.password) {
+      setLoading(false);
       setError("All fields are required.");
       return;
     }
 
     if (!isValidEmail(formData.email)) {
+      setLoading(false);
       setError("Please enter a valid email address.");
       return;
     }
 
-    setLoading(true);
     try {
       const res = await createUser({ ...formData, userType });
 
