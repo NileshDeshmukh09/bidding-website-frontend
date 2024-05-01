@@ -1,11 +1,10 @@
 // src/components/SignupForm.js
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { signUp } from '../store/actions/authActions';
 import { createUser } from "../services/user.services";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../common/Loading";
-import { setUser, setToken } from "../redux/slices/user.slice";
+import { setUser, setToken } from "../redux/slices/Authslice";
 import PrimaryButton from "../common/PrimaryButton";
 
 const Signup = () => {

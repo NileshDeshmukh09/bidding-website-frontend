@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { setUserType } from "../redux/slices/user.slice";
+import { setUserType } from "../redux/slices/Authslice";
 import PrimaryButton from "../common/PrimaryButton";
 
 const SignupLanding = () => {

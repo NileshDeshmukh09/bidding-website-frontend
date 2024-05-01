@@ -3,7 +3,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { logout } from '../redux/slices/user.slice';
+import { logout } from '../redux/slices/Authslice';
 
 const Header = () => {
   const dispatch = useDispatch();

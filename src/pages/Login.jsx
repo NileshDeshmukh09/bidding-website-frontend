@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../services/user.services"; // Assuming you have an auth service for logging in
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../common/Loading";
-import { setUser, setToken } from "../redux/slices/user.slice";
+import { setUser, setToken } from "../redux/slices/Authslice";
 import { Link } from "react-router-dom";
 import PrimaryButton from "../common/PrimaryButton";
 
