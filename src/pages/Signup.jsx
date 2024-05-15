@@ -33,6 +33,7 @@ const Signup = () => {
       setError("All fields are required.");
       return;
     }
+    
 
     if (!isValidEmail(formData.email)) {
       setLoading(false);
@@ -47,7 +48,8 @@ const Signup = () => {
         setLoading(false);
         dispatch(setUser(res.data.user));
         dispatch(setToken(res.data.accessToken));
-        navigate("/");
+        navigate("/create-profile/welcome");
+      
       } else {
         setLoading(false);
         setError(res.message || "Failed to sign up.");
@@ -117,7 +119,8 @@ const Signup = () => {
 
       <PrimaryButton
         onClick={handleSubmit}
-        children={loading ? <LoadingSpinner /> : `Sign Up`}
+        children={`Sign Up`}
+        loading={loading}
       />
 
       <p>

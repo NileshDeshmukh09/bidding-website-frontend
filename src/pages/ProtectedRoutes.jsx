@@ -1,19 +1,24 @@
 import React from "react";
-import Header from "../components/Header";
-import { Navigate, Outlet } from "react-router-dom";
+import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Signup from "./Signup";
+import Header from "../components/Header";
+import AppBar from "../common/AppBar";
+
 
 const FrontendHome = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const location = useLocation();
 
-  if(!isLoggedIn){
-    return <Navigate to={"/signup/select-user"}/>
+  if (!isLoggedIn) {
+    return <Navigate to={"/signup/select-user"} />;
   }
 
+  const isCreateProfileWelcome = location.pathname === "/create-profile/welcome";
+
   return (
-    <div>
-      <Header />
+    <div className="flex gap-y-16 flex-col min-h-screen">
+      {!isCreateProfileWelcome && <AppBar/>}
+      
       <Outlet />
     </div>
   );

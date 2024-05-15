@@ -1,16 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
+import React , { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { setUserType } from "../redux/slices/Authslice";
 import PrimaryButton from "../common/PrimaryButton";
 
 const SignupLanding = () => {
-  const userType = useSelector( state => state.user.userType);
+  const userType = useSelector((state) => state.user.userType);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [loading, setLoading] = useState(false);
 
   const handleUserTypeChange = (type) => {
     dispatch(setUserType(type));
+  };
+
+  const handleSubmit = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+      navigate("/Signup");
+    }, 1000);
   };
 
   return (
@@ -22,7 +32,9 @@ const SignupLanding = () => {
       <div id="userType" className="flex justify-between gap-4">
         <div
           className={`w-[200px] py-6 px-5 rounded-lg border-2 ${
-            userType === "CLIENT" ? "border-[#00B386] text-[#00B386]" : "border-black-500 text-black-500"
+            userType === "CLIENT"
+              ? "border-[#00B386] text-[#00B386]"
+              : "border-black-500 text-black-500"
           }`}
           onClick={() => handleUserTypeChange("CLIENT")}
         >
@@ -33,7 +45,6 @@ const SignupLanding = () => {
               value={userType}
               checked={userType === "CLIENT"}
               onChange={() => {}}
-
             />
           </div>
           <p className="mt-5">I'm Client hiring for a project</p>
@@ -41,7 +52,9 @@ const SignupLanding = () => {
 
         <div
           className={`w-[200px]  py-6 px-5 rounded-lg border-2 ${
-            userType === "FREELANCER" ? "border-[#00B386] text-[#00B386]" : "border-black-500 text-black-500"
+            userType === "FREELANCER"
+              ? "border-[#00B386] text-[#00B386]"
+              : "border-black-500 text-black-500"
           }`}
           onClick={() => handleUserTypeChange("FREELANCER")}
         >
@@ -59,9 +72,29 @@ const SignupLanding = () => {
       </div>
 
       <div className="mt-4 flex justify-center flex-col items-center">
-      <PrimaryButton onClick={() => navigate("/Signup")} children={userType === "FREELANCER" ? "Apply as a Freelancer" : userType === "CLIENT" ? "Join as a Client" : "Create Account"}/>
+        <PrimaryButton
+          onClick={handleSubmit}
+          children={
+            userType === "FREELANCER"
+              ? "Apply as a Freelancer"
+              : userType === "CLIENT"
+              ? "Join as a Client"
+              : "Create Account"
+          }
+          loading={loading}
+        />
 
-      <p>Already have an Account ? <span><Link to={'/login'} className="text-xl text-[#00B386] font-bold hover:underline">Sign In</Link></span></p>
+        <p>
+          Already have an Account ?{" "}
+          <span>
+            <Link
+              to={"/login"}
+              className="text-xl text-[#00B386] font-bold hover:underline"
+            >
+              Sign In
+            </Link>
+          </span>
+        </p>
       </div>
     </div>
   );
