@@ -23,7 +23,7 @@ const AppRouter = () => {
   const userType = useSelector((state) => state.user.userType);
   console.log(' -----------userType ------------- : ', userType )
   return (
-    <div className="App">
+    <div className="font-rubik">
       <Routes>
         {/* Public routes */}
         <Route path="/signup/select-user" element={<SignupLanding />} />
