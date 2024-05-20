@@ -18,7 +18,7 @@ export const createFreelancerProfile = async (data , token ) => {
 export const clientProfile = async (data , token) => {
   try {
    
-    const response = await axiosInstance.post('/user/clients', data, {
+    const response = await axiosInstance.post('/user/clients', {...data , totalFundingin$: 10000}, {
       headers: {
         'x-access-token': token, 
       },
@@ -29,3 +29,19 @@ export const clientProfile = async (data , token) => {
     return error.response.data;
   }
 };
+
+
+export const getFreelancerProfile = async( freelancerId , token) => {
+  try {
+   
+    const response = await axiosInstance.get(`/user/freelancers/${freelancerId}`, {
+      headers: {
+        'x-access-token': token, 
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching Freelancer data:', error.response.data);
+    return error.response.data;
+  }
+}

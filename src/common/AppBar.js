@@ -37,7 +37,14 @@ function DrawerAppBar(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }} className="text-[#00B386]">
+      <Typography
+        variant="h6"
+        sx={{ my: 2 }}
+        className="text-[#00B386] cursor-pointer"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
         WINWAVE
       </Typography>
       <Divider />
@@ -99,9 +106,12 @@ function DrawerAppBar(props) {
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-            className="text-[#00B386] font-bold"
+            className="text-[#00B386] font-bold cursor-pointer"
+            onClick={() => {
+              navigate("/");
+            }}
           >
-            WINWAVE
+             WINWAVE
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <List

@@ -48,6 +48,7 @@ const Signup = () => {
         setLoading(false);
         dispatch(setUser(res.data.user));
         dispatch(setToken(res.data.accessToken));
+        
         navigate("/create-profile/welcome");
       
       } else {

@@ -15,10 +15,13 @@ import ProfileHome from "./pages/Profile/ProfileHome";
 import Skills from "./pages/Profile/Skills";
 import CreateClientProfile from "./pages/Profile/CreateClientProfile";
 import JobListByClient from "./components/JobListByClient";
+import CreateProposal from "./components/CreateProposal";
+import ReviewAllProposals from "./components/ReviewAllProposals";
+import JobForm from './components/JobForm';
 
 const AppRouter = () => {
   const userType = useSelector((state) => state.user.userType);
-
+  console.log(' -----------userType ------------- : ', userType )
   return (
     <div className="App">
       <Routes>
@@ -32,10 +35,15 @@ const AppRouter = () => {
           {userType === "CLIENT" ? (
             <>
               <Route index element={<ClientDashboard />} />
+              <Route path="/create-jobs" element={<JobForm />} />
               <Route path="/jobs" element={<JobListByClient />} />
+              <Route path="/jobs/:jobId/review-proposals" element={<ReviewAllProposals />} />
             </>
           ) : (
+            <>
             <Route index element={<FreelancerDashboard />} />
+            <Route path="/jobs/:jobId/create-proposal" element={<CreateProposal />} />
+            </>
           )}
 
           {/* Profile creation routes */}
