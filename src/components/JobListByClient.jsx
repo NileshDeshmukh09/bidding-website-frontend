@@ -40,7 +40,7 @@ const JobListByClient = () => {
 
   if(!loading &&  jobs.length == 0 ) {
     return (
-      <div className="flex bg-slate-200 justify-center items-center h-screen">
+      <div className="flex  bg-slate-200 justify-center items-center h-screen">
         <p className="text-3xl">OOps , You have not posted any Jobs yet</p>
       </div>
     )
@@ -48,7 +48,7 @@ const JobListByClient = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 py-10 px-7 ">
+      <div className="grid grid-cols-3 py-10 px-7 mx-20 ">
       {loading && <LoadingSpinner/>}
       {error && <p>Error: {error}</p>}
         { jobs?.map((job) => (

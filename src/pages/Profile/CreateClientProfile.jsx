@@ -54,7 +54,7 @@ const CreateClientProfile = () => {
       setLoading(false);
 
       if (res.data && res.data.success) {
-      dispatch(setUserProfile(res.data.client))
+        dispatch(setUserProfile(res.data.client));
         navigate("/");
       } else {
         setError(res.message);
@@ -81,12 +81,14 @@ const CreateClientProfile = () => {
   ];
 
   return (
-    <div className="m-10 p-4">
-      <h1 className="text-4xl font-medium">Create Client Profile</h1>
-      <p className="text-lg p-4 mb-4">Enter the details of the Company</p>
-      <div className="w-full">
-        <div className="flex justify-evenly  my-4">
-          <label htmlFor="companyName" className="w-1/4 text-xl block mb-2">
+    <div className="my-10 mx-24 p-4">
+      <h1 className="text-3xl font-medium my-1">Create Client Profile</h1>
+      <p className="text-sm font-normal mb-4">
+        Enter the details of the Company
+      </p>
+      <div className="w-full  py-4 px-9">
+        <div className="flex  justify-around  my-4">
+          <label htmlFor="companyName" className="w-1/4  block mb-2">
             Let's start with a strong title. What is the name of your company?
           </label>
           <input
@@ -96,11 +98,11 @@ const CreateClientProfile = () => {
             placeholder="Enter the company name"
             value={formData.companyName}
             onChange={handleChange}
-            className="border w-1/2 h-[50px] border-gray-300 rounded px-3 py-4"
+            className="border w-1/2 h-[50px] text-primary-black font-medium border-gray-300 rounded px-3 py-4"
             required
           />
         </div>
-        <div className="flex justify-evenly my-4">
+        <div className="flex justify-around my-4">
           <label htmlFor="companySize" className="w-1/4 mb-2">
             Select the Company Size:
           </label>
@@ -109,7 +111,7 @@ const CreateClientProfile = () => {
             name="companySize"
             value={formData.companySize}
             onChange={handleChange}
-            className="border border-gray-300 w-1/2 rounded-md px-3 py-4 outline-none focus:border-blue-500"
+            className="border border-gray-300 text-primary-black font-medium w-1/2 rounded-md px-3 py-4 outline-none focus:border-blue-500"
           >
             {companySizeOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -118,9 +120,10 @@ const CreateClientProfile = () => {
             ))}
           </select>
         </div>
-        <div className="flex justify-evenly my-4">
+        <div className="flex justify-around my-4">
           <label htmlFor="websiteURL" className="block sm:w-1/4 mb-2">
-          Kindly furnish the digital coordinates of your company by entering its website URL
+            Kindly furnish the digital coordinates of your company by entering
+            its website URL
           </label>
           <input
             type="text"
@@ -129,20 +132,24 @@ const CreateClientProfile = () => {
             placeholder="Enter the website URL of company"
             value={formData.websiteURL}
             onChange={handleChange}
-            className="border border-gray-300 sm:w-1/2 rounded px-3 py-4 "
+            className="border border-gray-300 text-primary-black font-medium sm:w-1/2 rounded px-3 py-4 "
             required
           />
         </div>
         {error && <p className="text-red-500">{error}</p>}
 
-        <div className="flex justify-end">
+        <div className="flex justify-around">
+          <div  className="w-1/4 mb-2"></div>
 
-        <PrimaryButton
-          onClick={handleSubmit}
-          children="Next, Create the Profile"
-          loading={loading}
-          />
+          <div className="w-1/2">
+            <PrimaryButton
+              onClick={handleSubmit}
+              children="Next, Create the Profile"
+              loading={loading}
+              widthFull={true}
+            />
           </div>
+        </div>
       </div>
     </div>
   );

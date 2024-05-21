@@ -6,7 +6,7 @@ import SecondaryButton from '../common/SecondaryButton'
 
 const ClientDashboard = () => {
   const navigate = useNavigate();
-
+ 
   const handleClick = () => {
     navigate("/jobs");
   }

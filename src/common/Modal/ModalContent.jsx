@@ -119,6 +119,9 @@ export default function ModalContent({ open, handleClose, proposal , fetchPropos
               <MenuItem value="REJECTED" className="text-sm lowercase">
                 REJECTED
               </MenuItem>
+              { proposal.status == "ACCEPTED" && <MenuItem value="COMPLETED" className="text-sm lowercase">
+                COMPLETED
+              </MenuItem>}
             </Select>
           </FormControl>
           <Box sx={{ mt: 2 }}>

@@ -12,32 +12,54 @@ const Signup = () => {
   const userType = useSelector((state) => state.user.userType);
 
   const [formData, setFormData] = useState({
-    username: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
+    username: "",
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
+    
+
     // Validate form fields
-    if (!formData.username || !formData.email || !formData.password) {
+    if (
+      !formData.firstname ||
+      !formData.lastname ||
+      !formData.email ||
+      !formData.password 
+    ) {
       setLoading(false);
       setError("All fields are required.");
       return;
     }
-    
+
+    if( formData.firstname && formData.lastname){
+      const username = `${formData.firstname} ${formData.lastname}`;
+      setFormData({ ...formData, username });
+
+    }
 
     if (!isValidEmail(formData.email)) {
       setLoading(false);
       setError("Please enter a valid email address.");
+      return;
+    }
+
+    if(!formData.username){ 
+      setLoading(false);
+      setError("Please enter a username.");
       return;
     }
 
@@ -48,9 +70,8 @@ const Signup = () => {
         setLoading(false);
         dispatch(setUser(res.data.user));
         dispatch(setToken(res.data.accessToken));
-        
+
         navigate("/create-profile/welcome");
-      
       } else {
         setLoading(false);
         setError(res.message || "Failed to sign up.");
@@ -62,8 +83,6 @@ const Signup = () => {
     }
   };
 
- 
-
   // Helper function to validate email format
   const isValidEmail = (email) => {
     // Regular expression for basic email validation
@@ -72,67 +91,109 @@ const Signup = () => {
   };
 
   return (
-    <form className="max-w-sm mx-auto mt-8">
-      <div className="mb-4">
-        <h1 className=" my-6 text-3xl text-center text-[#00B386]">{userType ==='CLIENT' ? `Signup to hire talent` : `Signup to find work for you`}</h1>
-        <label htmlFor="username" className="block mb-2">
-          Username
-        </label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          className="border border-gray-300 rounded px-3 py-2 w-full"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="email" className="block mb-2">
-          Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="border border-gray-300 rounded px-3 py-2 w-full"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="password" className="block mb-2">
-          Password
-        </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          className="border border-gray-300 rounded px-3 py-2 w-full"
-          required
-        />
-      </div>
-      {error && <p className="text-red-500">{error}</p>}
+    <div className="min-h-screen flex items-center justify-center">
+      <form className=" w-3/5 p-8 mt-8" onSubmit={handleSubmit}>
+        <h1 className="my-6 text-3xl font-medium text-[#00B386]">
+          {userType === "CLIENT"
+            ? "Signup to hire talent"
+            : "Signup to find work for you"}
+        </h1>
+        <div className=" flex justify-between gap-x-2">
+          <div className="mb-4 w-1/2">
+            <label
+              htmlFor="firstname"
+              className="block text-sm font-normal text-primary-grey mb-2"
+            >
+              First Name
+            </label>
+            <input
+              type="text"
+              id="firstname"
+              name="firstname"
+              value={formData.firstname}
+              onChange={handleChange}
+              placeholder="First Name"
+              className="border placeholder:font-normal rounded-lg px-3 py-2 w-full font-medium"
+              required
+            />
+          </div>
+          <div className="mb-4 w-1/2">
+            <label
+              htmlFor="lastname"
+              className="block text-sm font-normal text-primary-grey mb-2"
+            >
+              Last Name
+            </label>
+            <input
+              type="text"
+              id="lastname"
+              name="lastname"
+              value={formData.lastname}
+              onChange={handleChange}
+              placeholder="Last Name"
+              className="border placeholder:font-normal rounded-lg px-3 py-2 w-full font-medium"
+              required
+            />
+          </div>
+        </div>
 
-      <PrimaryButton
-        onClick={handleSubmit}
-        children={`Sign Up`}
-        loading={loading}
-      />
+        <div className="mb-4">
+          <label
+            htmlFor="email"
+            className="block text-sm font-normal text-primary-grey mb-2"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            className="border placeholder:font-normal rounded-lg px-3 py-2 w-full font-medium"
+            required
+          />
+        </div>
 
-      <p>
-        Already have an Account ?{" "}
-        <span>
-          <Link to={"/login"} className="text-xl font-bold hover:underline">
-            Sign In
-          </Link>
-        </span>
-      </p>
-    </form>
+        <div className="mb-4">
+          <label
+            htmlFor="password"
+            className="block text-sm font-normal text-primary-grey mb-2"
+          >
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Password"
+            className="border placeholder:font-normal rounded-lg px-3 py-2 w-full font-medium"
+            required
+          />
+        </div>
+        {error && <p className="text-red-500 ">{error}</p>}
+        <div className="my-5">
+
+        <PrimaryButton
+          onClick={handleSubmit}
+          children="Create Account"
+          loading={loading}
+          widthFull={true}
+          />
+          </div>
+        <p>
+          Already have an Account?{" "}
+          <span>
+            <Link to="/login" className="text-xl text-primary-green font-bold hover:underline">
+              Login
+            </Link>
+          </span>
+        </p>
+      </form>
+    </div>
   );
 };
 

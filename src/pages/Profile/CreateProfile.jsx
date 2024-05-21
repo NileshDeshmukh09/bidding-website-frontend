@@ -43,12 +43,14 @@ const CreateProfile = () => {
   return (
     <div className="pt-20 px-20 flex flex-col sm:flex-row  sm:justify-evenly">
       <div className=" w-full sm:w-3/5  ">
-        <h1 className="p-5 text-4xl  text-[#44475B] ">
-          Hey <span className="text-[#00B386] uppercase">{user.username}.</span>{" "}
+        <h1 className="p-5 text-3xl font-medium  text-primary-black ">
+          Hey <span className="text-primary-green">{user.username}.</span>{" "}
           Ready for your Next Big Opportunity ?
         </h1>
 
-        <div className="m-5">
+        <p className="p-5 text-base text-primary-green font-medium">Just follow few simple steps :</p>
+
+        <div className="">
           {featureItem.map((item, index) => (
             <FeatureItem key={index} icon={item.icon} text={item.text} />
           ))}
@@ -57,7 +59,7 @@ const CreateProfile = () => {
         <div className="pt-5 px-8  flex justify-between items-center ">
           <PrimaryButton onClick={handleSubmit} children="Get  Started" loading={loading} />
 
-          <p className="text-[#9c9c9c] w-1/2 text-center p-3 flex flex-end">{`It only takes 5-10 min. we will edit as you go `}</p>
+          <p className="text-[#9c9c9c] w-1/2 text-center p-3 flex flex-end">{`It only takes 5-10 min. we will save as you go `}</p>
         </div>
       </div>
 

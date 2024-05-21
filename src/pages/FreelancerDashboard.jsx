@@ -3,7 +3,7 @@ import FreelancerJobList from '../components/FreelanceerJobList'
 
 const FreelancerDashboard = () => {
   return (
-    <div >
+    <div className='mx-20 my-20' >
 
       <div className='px-6 py-4'>
     <h1 className='text-2xl font-bold'><span className='text-3xl font-bond text-[#00B386]'>Freelancer : </span> Jobs you might like</h1>

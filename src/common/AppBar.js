@@ -17,11 +17,12 @@ import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/slices/Authslice";
+import imageUrls from "../constants/imageurls";
 
 const drawerWidth = 240;
 const navItems = [
-  { name: "Home", path: "/" },
-  { name: "Services", path: "/services" },
+  { name: "Find Talent", path: "/" },
+  { name: "Find Work", path: "/services" },
   { name: "Logout", path: "/singup/select-user" },
 ];
 
@@ -37,16 +38,18 @@ function DrawerAppBar(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography
-        variant="h6"
-        sx={{ my: 2 }}
-        className="text-[#00B386] cursor-pointer"
+      <Box
+        sx={{ my: 2, mx: 2, cursor: "pointer" }}
         onClick={() => {
           navigate("/");
         }}
       >
-        WINWAVE
-      </Typography>
+        <img
+          src={imageUrls.logo}
+          alt="WINWAVE Logo"
+          style={{ height: 40, textAlign: "center" }}
+        />
+      </Box>
       <Divider />
       <List>
         {navItems.map((item) => (
@@ -86,9 +89,10 @@ function DrawerAppBar(props) {
         component="nav"
         position="fixed"
         sx={{
+          padding : "0px 80px",
           boxShadow: "none",
           bgcolor: "#fff",
-          borderBottom: "1px solid #d9d6d6",
+          borderBottom: "2px solid #d9d6d6",
         }}
       >
         <Toolbar>
@@ -111,7 +115,18 @@ function DrawerAppBar(props) {
               navigate("/");
             }}
           >
-             WINWAVE
+            <Box
+              sx={{ my: 2, mx: 2, cursor: "pointer" }}
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <img
+                src={imageUrls.logo}
+                alt="WINWAVE Logo"
+                style={{ height: 40, textAlign: "center" }}
+              />
+            </Box>
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <List

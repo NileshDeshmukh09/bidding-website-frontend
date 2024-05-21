@@ -17,7 +17,7 @@ const FrontendHome = () => {
 
   return (
     <div className="flex gap-y-16 flex-col min-h-screen">
-      {!isCreateProfileWelcome && <AppBar/>}
+      { !isCreateProfileWelcome && <AppBar/>}
       
       <Outlet />
     </div>

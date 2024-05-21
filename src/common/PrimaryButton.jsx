@@ -1,11 +1,11 @@
 import React from "react";
 import LoadingSpinner from "./Loading";
 
-const PrimaryButton = ({ onClick, children, loading = false }) => {
+const PrimaryButton = ({ onClick, children, loading = false , widthFull = false }) => {
   return (
     <button
       onClick={onClick}
-      className={`my-4 py-3  px-10 bg-[#00B386] flex gap-2  hover:bg-[#178469]  font-semibold ${
+      className={`my-4 py-3${ widthFull ? " w-full flex justify-center" : ""}  px-10 bg-[#00B386] flex gap-2  hover:bg-[#178469]  font-semibold ${
         loading
           ? "text-[#D4D4D4] duration-300 ease-in-out text-sm  cursor-not-allowed" 
           : "text-white cursor-pointer duration-200 ease-in-out text-[15px]"

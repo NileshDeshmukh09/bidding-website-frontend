@@ -28,17 +28,17 @@ const JobCard = ({ job }) => {
   };
 
   return (
-    <div className="border border-[#d9d6d6] bg-[#f5f5f4] shadow-lg rounded-lg p-4">
+    <div className="border border-[#d9d6d6] text-primary-black rounded-2xl p-8">
       <h3 className="text-xl mb-5 uppercase font-bold">{job.title}</h3>
-      <div className="flex justify-between text-[#44475B] font-medium">
+      <div className="flex justify-between text-primary-black font-normal">
         <p className="mr-2">Experience</p>
         <p className="mr-2">Project scope</p>
       </div>
-      <div className="flex justify-between text-[#00B786] font-semibold">
+      <div className="flex justify-between text-[#00B786] font-normal">
         <p className="mr-2">{job.experience}</p>
         <p className="mr-2">{job.projectScope}</p>
       </div>
-      <p className="mb-4 mt-3 text-sm text-[#717171] font-medium overflow-hidden line-clamp-4">
+      <p className="mb-4 mt-3 text-sm text-[#717171] font-normal overflow-hidden line-clamp-4">
         {job.description}
       </p>
       <div>
@@ -47,7 +47,7 @@ const JobCard = ({ job }) => {
           {job.skills.map((skill, index) => (
             <li
               key={index}
-              className="m-1 px-2 py-1 border font-normal inline-block border-[#d9d6d6] text-[#3b3030] bg-[#e1e1e1] rounded-md"
+              className="m-1 px-2 py-1  font-normal inline-block  text-primary-green bg-[#81dcc550] rounded-lg"
             >
               {skill}
             </li>
@@ -56,16 +56,17 @@ const JobCard = ({ job }) => {
       </div>
       {userType === "FREELANCER" && (
         <div>
-          <SecondaryButton
+          <PrimaryButton
             children={`Create Proposal`}
             onClick={handleCreateProposal}
+            widthFull={true}
           />
         </div>
       )}
 
       {userType === "CLIENT" && (
         <div>
-          <SecondaryButton children={`Review proposals`} onClick={handleReviewProposals} />
+          <PrimaryButton children={`Review proposals`} widthFull={true} onClick={handleReviewProposals} />
         
         </div>
       )}

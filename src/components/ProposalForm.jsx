@@ -4,6 +4,7 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { useNavigate, useParams } from "react-router-dom";
 import { submitProposal } from "../services/jobs.services";
 import { useAuthToken } from "../hooks/useAuth";
+import imageUrls from "../constants/imageurls";
 
 const ProposalForm = () => {
   const { jobId } = useParams();
@@ -44,16 +45,15 @@ const ProposalForm = () => {
     }
 
     const data = new FormData();
-    data.append('description', formData.description);
-    data.append('jobId',jobId ); // Assuming jobId is hardcoded for now
-    data.append('deadline', '2024-12-31'); // Assuming deadline is hardcoded for now
-    data.append('charges', formData.charges);
-    data.append('coverLetter', formData.coverLetter);
+    data.append("description", formData.description);
+    data.append("jobId", jobId); // Assuming jobId is hardcoded for now
+    data.append("deadline", "2024-12-31"); // Assuming deadline is hardcoded for now
+    data.append("charges", formData.charges);
+    data.append("coverLetter", formData.coverLetter);
 
     try {
-
-      console.log('data : ', data );
-      const res = await submitProposal( data , token)
+      console.log("data : ", data);
+      const res = await submitProposal(data, token);
 
       if (res.data && res.data.success) {
         setLoading(false);
@@ -63,12 +63,9 @@ const ProposalForm = () => {
           charges: "",
           description: "",
           coverLetter: null,
-        })
+        });
 
-        navigate("/")
-
-        
-       
+        navigate("/");
       } else {
         setLoading(false);
         setError(res.message || "Failed to create proposal.");
@@ -81,10 +78,12 @@ const ProposalForm = () => {
   };
 
   return (
-    <form className="w-full border border-[#dcdad6] bg-slate-50 rounded-xl p-6" >
-   
+    <form className="w-full  rounded-xl py-4 px-3">
       <div className="mb-4">
-        <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
+        <label
+          htmlFor="description"
+          className="block text-primary-black  font-medium  mb-2"
+        >
           Description
         </label>
         <textarea
@@ -92,67 +91,73 @@ const ProposalForm = () => {
           name="description"
           value={formData.description}
           onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          placeholder="Description"
+          className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="Brief about your skillset and experience"
           rows="4"
           required
         ></textarea>
       </div>
 
-      <hr />
+      {/* <hr /> */}
 
-      <div className="flex flex-col sm:flex-row justify-between p-3">
+      <div className="flex flex-col sm:flex-row justify-between my-3 py-3">
+        <div className="w-full sm:w-1/2 ">
+          <div className="mt-5">
+            <label
+              htmlFor="charges"
+              className="block text-primary-black  font-medium"
+            >
+              Total price of project
+            </label>
+            <p className="text-sm text-[#9a9898]">
+              This includes all milestones, and is the amount your client will
+              see
+            </p>
+            <input
+              type="number"
+              id="charges"
+              name="charges"
+              value={formData.charges}
+              onChange={handleChange}
+              className="shadow my-2 bg-transparent border-b placeholder:text-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="$ 0.00"
+              required
+            />
+          </div>
+
+          <div className="my-4">
+            <label
+              htmlFor="coverLetter"
+              className="block text-primary-black  font-medium"
+            >
+              Upload Cover Letter
+            </label>
+            <input
+              type="file"
+              id="coverLetter"
+              name="coverLetter"
+              className="mt-1 block w-full border border-dotted border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 p-2"
+              onChange={handleChange}
+              required
+            />
+            <div className="mt-10">
+
+            <PrimaryButton
+              onClick={handleSubmit}
+              children="Confirm & Submit"
+              loading={isLoading}
+              widthFull={true}
+              />
+              </div>
+          </div>
+        </div>
+
         <div className="p-4 text-center">
-          <MonetizationOnIcon
-            sx={{ width: 150, height: 150 }}
-            className="text-[#a67c00]"
-          />
-          <p className="text-[#605c5c] text-sm">
-            Includes Winwave Fixed-Price Protection.
-          </p>
-        </div>
-
-        <div className="w-full sm:w-1/2 p-4">
-          <label htmlFor="charges" className="block text-black font-bold">
-            Total price of project
-          </label>
-          <p className="text-sm text-[#9a9898]">
-            This includes all milestones, and is the amount your client will see
-          </p>
-          <input
-            type="number"
-            id="charges"
-            name="charges"
-            value={formData.charges}
-            onChange={handleChange}
-            className="shadow my-2 bg-transparent border-b appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="$ 0.00"
-            required
-          />
+          <img src={imageUrls.safeMoney} width={"90%"} alt={"safe money"} />
         </div>
       </div>
 
-      <hr />
-
-      <div className="my-4">
-        <label htmlFor="coverLetter" className="block text-sm font-medium">
-          Upload Cover Letter
-        </label>
-        <input
-          type="file"
-          id="coverLetter"
-          name="coverLetter"
-          className="mt-1 block w-full border border-dotted border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 p-2"
-          onChange={handleChange}
-          required
-        />
-      </div>
       {error && <p className="mb-4 text-red-600">{error}</p>}
-      <PrimaryButton
-        onClick={handleSubmit}
-        children="Create Proposal"
-        loading={isLoading}
-      />
     </form>
   );
 };

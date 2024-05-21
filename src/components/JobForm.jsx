@@ -76,14 +76,18 @@ const ClientForm = () => {
   };
 
   return (
-    <div className="mx-auto flex justify-center">
+    <div className="mt-2  py-24 px-32">
+
+      <h1 className="text-3xl font-medium">Create Job Posting</h1>
+      <p className="text-sm font-normal mb-4">Enter the Details of Job Posting</p>
+
 
    
-    <form  className="w-full max-w-lg">
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+    <form  className="sm:w-1/2  mt-12">
+    
       <div className="mb-4">
-        <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
-          Title
+        <label htmlFor="title" className="block text-primary-grey text-base font-medium mb-2">
+        Job Title
         </label>
         <input
           type="text"
@@ -91,12 +95,12 @@ const ClientForm = () => {
           name="title"
           value={formData.title}
           onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          placeholder="Title"
+          className=" border border-primary-grey2 placeholder:text-primary-black  placeholder:text-xl rounded-lg sm:w-full py-2 px-4"
+          placeholder="Job Title"
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="skills" className="block text-gray-700 font-bold mb-2">
+        <label htmlFor="skills" className="block text-primary-grey text-base font-medium mb-2">
           Skills
         </label>
         <input
@@ -105,12 +109,12 @@ const ClientForm = () => {
           name="skills"
           value={formData.skills.join(", ")} // Join skills array with comma and space
           onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="border border-primary-grey2 placeholder:text-primary-black  placeholder:text-xl rounded-lg sm:w-full py-2 px-4"
           placeholder="Skills"
         />
       </div>
       <div className="mb-4">
-  <label htmlFor="projectScope" className="block text-gray-700 font-bold mb-2">
+  <label htmlFor="projectScope" className="block text-primary-grey font-medium  mb-2">
     Project Scope
   </label>
   <div>
@@ -156,7 +160,7 @@ const ClientForm = () => {
       <div className="mb-4">
         <label
           htmlFor="timeRequired"
-          className="block text-gray-700 font-bold mb-2"
+          className="block text-primary-grey text-base font-medium mb-2"
         >
           Time Required
         </label>
@@ -166,12 +170,12 @@ const ClientForm = () => {
           name="timeRequired"
           value={formData.timeRequired}
           onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="border border-primary-grey2 placeholder:text-primary-black  placeholder:text-xl rounded-lg sm:w-full py-2 px-4"
           placeholder="Time Required"
         />
       </div>
       <div className="mb-4">
-  <label htmlFor="experience" className="block text-gray-700 font-bold mb-2">
+  <label htmlFor="experience" className="block text-primary-grey text-base font-medium mb-2">
     Experience Required
   </label>
   <div>
@@ -217,7 +221,7 @@ const ClientForm = () => {
       <div className="mb-4">
         <label
           htmlFor="contractType"
-          className="block text-gray-700 font-bold mb-2"
+          className="block text-primary-grey text-base font-medium mb-2"
         >
           Contract Type
         </label>
@@ -227,12 +231,12 @@ const ClientForm = () => {
           name="contractType"
           value={formData.contractType}
           onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="border border-primary-grey2 placeholder:text-primary-black  placeholder:text-xl rounded-lg sm:w-full py-2 px-4"
           placeholder="Contract Type"
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="budget" className="block text-gray-700 font-bold mb-2">
+        <label htmlFor="budget" className="block text-primary-grey font-bold mb-2">
           Budget
         </label>
         <input
@@ -241,31 +245,34 @@ const ClientForm = () => {
           name="budget"
           value={formData.budget}
           onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="border border-primary-grey2 placeholder:text-primary-black  placeholder:text-xl rounded-lg sm:w-full py-2 px-4"
           placeholder="Budget"
         />
       </div>
       <div className="mb-4">
         <label
           htmlFor="description"
-          className="block text-gray-700 font-bold mb-2"
+          className="block text-primary-grey text-base font-medium mb-2"
         >
           Description
-        </label>
+        </label> 
         <textarea
           id="description"
           name="description"
           value={formData.description}
           onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="border border-primary-grey2 placeholder:text-primary-black  placeholder:text-xl rounded-lg sm:w-full py-2 px-4"
           placeholder="Description"
           rows="4"
         ></textarea>
       </div>
+
+      {error && <p className="text-red-500 mb-4">{error}</p>}
       <PrimaryButton
         onClick={handleSubmit}
         children="Create Job"
         loading={isLoading}
+        widthFull={true}
       />
     </form>
 

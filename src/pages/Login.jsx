@@ -54,55 +54,66 @@ const Login = () => {
   };
 
   return (
-    <form className="max-w-sm mx-auto mt-8">
-      <div className="mb-4">
-        <h1 className=" my-6 text-3xl text-center text-[#00B386]">
-          {userType === "CLIENT"
-            ? `Login to hire talent`
-            : `Login to find work for you`}
-        </h1>
-        <label htmlFor="email" className="block mb-2">
-          Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="border border-gray-300 rounded px-3 py-2 w-full"
-          required
-        />
-      </div>
-      <div className="mb-4">
-        <label htmlFor="password" className="block mb-2">
-          Password
-        </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          className="border border-gray-300 rounded px-3 py-2 w-full"
-          required
-        />
-      </div>
-      {error && <p className="text-red-500">{error}</p>}
-      <PrimaryButton onClick={handleSubmit} children={`Login`}  loading={loading}/>
+    <div className="min-h-screen flex items-center justify-center">
+      <form className=" mt-8">
+        <div className="mb-4">
+          <h1 className=" my-6 text-3xl  font-medium text-[#00B386]">
+            {userType === "CLIENT"
+              ? `Login to hire talent`
+              : `Login to find work for you`}
+          </h1>
+          <label htmlFor="email" className="block mb-2">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Email"
+            className="border placeholder:font-normal rounded-lg px-3 py-2 w-full font-medium"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="password" className="block mb-2">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Password"
+            className="border placeholder:font-normal rounded-lg px-3 py-2 w-full font-medium"
+            required
+          />
+        </div>
+        {error && <p className="text-red-500">{error}</p>}
+        <div className="mt-5">
+          <PrimaryButton
+            onClick={handleSubmit}
+            children={`Login`}
+            loading={loading}
+            widthFull={true}
+          />
+        </div>
 
-      <p>
-        Create a New Account ?{" "}
-        <span>
-          <Link
-            to={"/signup/select-user"}
-            className="font-medium text-xl text-[#00B386] hover:underline"
-          >
-            Signup
-          </Link>
-        </span>
-      </p>
-    </form>
+        <p>
+          Create a New Account ?{" "}
+          <span>
+            <Link
+              to={"/signup/select-user"}
+              className="font-medium text-xl text-[#00B386] hover:underline"
+            >
+              Signup
+            </Link>
+          </span>
+        </p>
+      </form>
+    </div>
   );
 };
 

@@ -23,7 +23,7 @@ export default function Skills({ onSelectedSkillsChange }) {
   }, [selectedSkills, onSelectedSkillsChange]);
 
   return (
-    <div className="card flex p-4 bg-[#D4D4D4] rounded-lg justify-content-center">
+    <div className="card flex p-4 sm:w-3/5 border bg-white rounded-lg justify-content-center">
       <MultiSelect
         value={selectedSkills}
         onChange={handleSkillSelectionChange}
@@ -33,7 +33,7 @@ export default function Skills({ onSelectedSkillsChange }) {
         placeholder="Select Skills"
         panelClassName="p-4 bg-[#F5F5F5]"
         maxSelectedLabels={5}
-        className="w-full md:w-20rem"
+        className="w-full"
       />
     </div>
   );

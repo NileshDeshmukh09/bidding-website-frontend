@@ -64,10 +64,10 @@ const FreelancerExperience = () => {
     <div className="p-5 my-4 mx-10">
       <div className="">
         <div className="sm:w-3/5">
-          <h1 className="my-5 text-4xl font-medium">
-            A few quick questions: first, have you freelanced before?
+          <h1 className="my-5 text-3xl font-medium">
+            Few Quick Questions: First, Have you Freelanced Before?
           </h1>
-          <p className="text-lg my-3 font-normal">
+          <p className="text-sm my-3 font-normal">
             This lets us know how much help to give you along the way. We won’t
             share your answer with anyone else, including potential clients.
           </p>
@@ -77,33 +77,34 @@ const FreelancerExperience = () => {
           {experienceArr.map((data) => (
             <div
               key={data.exp}
-              className={`w-1/3 py-6 px-5 rounded-lg border-2 ${
+              className={`w-1/3 p-2 sm:p-9 rounded-2xl border ${
                 experience === data.exp
-                  ? "border-[#00B386] text-[#00B386]"
+                  ? "border-[#00B386] text-[#00B386] border-2"
                   : "border-black-500 text-black-500"
               }`}
               onClick={() => handleExperienceChange(data.exp)}
             >
               <div className="my-1 flex justify-between items-center">
-                <p className="font-bold uppercase">{data.exp}</p>
+                <p className="font-bold text-2xl">{data.exp}</p>
                 <input
                   type="radio"
                   value={data.exp}
                   checked={experience === data.exp}
+                  className="w-5 h-5"
                   onChange={() => handleExperienceChange(data.exp)}
                 />
               </div>
-              <p className="mt-8 text-xl">{data.desc}</p>
+              <p className="mt-8 text-sm">{data.desc}</p>
             </div>
           ))}
         </div>
       </div>
 
       <div className=" mt-20">
-        <h1 className="my-5 sm:w-3/5 text-4xl font-medium">
+        <h1 className="my-5 sm:w-3/5 text-3xl font-medium">
           Craft Your Freelance Path: Select Your Expertise
         </h1>
-        <p className="text-lg sm:w-3/5 text=[#44475B] my-3 font-normal">
+        <p className="text-sm sm:w-3/5 text=[#44475B] my-3 font-normal">
           Empower your freelance journey by handpicking the skills that define
           your expertise and passion
         </p>
@@ -113,11 +114,12 @@ const FreelancerExperience = () => {
 
       {error && <p className="text-red-500">{error}</p>}
 
-      <div className="flex justify-end pr-2">
+      <div className="sm:w-3/5 mt-6">
         <PrimaryButton
           onClick={handleNext}
           loading={loading}
           children={"Next, Create the Profile"}
+          widthFull={true}
         />
       </div>
     </div>
