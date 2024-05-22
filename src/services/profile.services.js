@@ -45,3 +45,33 @@ export const getFreelancerProfile = async( freelancerId , token) => {
     return error.response.data;
   }
 }
+
+export const getFreelancerProfileByUserID = async( userId , token) => {
+  try {
+   
+    const response = await axiosInstance.get(`/user/freelancers/user/${userId}`, {
+      headers: {
+        'x-access-token': token, 
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching Freelancer By UserID data:', error.response.data);
+    return error.response.data;
+  }
+}
+
+export const  getClientProfileByUserID = async( userId , token) => {
+  try {
+   
+    const response = await axiosInstance.get(`/user/clients/user/${userId}`, {
+      headers: {
+        'x-access-token': token, 
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error('Error fetching Client By UserID data:', error.response.data);
+    return error.response.data;
+  }
+}

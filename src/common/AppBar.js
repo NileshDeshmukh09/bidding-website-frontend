@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/slices/Authslice";
 import imageUrls from "../constants/imageurls";
+import { setUserProfile } from "../redux/slices/profileSlice";
 
 const drawerWidth = 240;
 const navItems = [
@@ -57,9 +58,13 @@ function DrawerAppBar(props) {
             key={item.name}
             onClick={() => {
               if (item.name === "Logout") {
+                dispatch(setUserProfile(null));
                 dispatch(logout());
+                navigate("/signup/select-user");
+              }else{
+
+                navigate(item.path);
               }
-              navigate(item.path);
             }}
           >
             <ListItemText
@@ -141,9 +146,13 @@ function DrawerAppBar(props) {
                   key={item.name}
                   onClick={() => {
                     if (item.name === "Logout") {
+                      dispatch(setUserProfile(null));
                       dispatch(logout());
+                      navigate("/signup/select-user");
+                    }else{
+      
+                      navigate(item.path);
                     }
-                    navigate(item.path);
                   }}
                 >
                   <ListItemText

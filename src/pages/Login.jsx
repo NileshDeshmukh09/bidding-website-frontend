@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../services/user.services";
 import { useNavigate, Link } from "react-router-dom";
 import LoadingSpinner from "../common/Loading";
-import { setUser, setToken } from "../redux/slices/Authslice";
+import { setUser, setToken, setUserType } from "../redux/slices/Authslice";
 import PrimaryButton from "../common/PrimaryButton";
+import { getClientProfileByUserID, getFreelancerProfileByUserID } from "../services/profile.services";
+import { setUserProfile } from "../redux/slices/profileSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -41,7 +43,28 @@ const Login = () => {
         setLoading(false);
         dispatch(setUser(res.data.user));
         dispatch(setToken(res.data.accessToken));
-        navigate("/");
+        dispatch(setUserType(res.data.user.userType));
+
+        console.log("LoginProfile : ", res.data.user);
+        if (res.data.user.userType === "FREELANCER") {
+          const profileData = await getFreelancerProfileByUserID(
+            res.data.user.id,
+            res.data.accessToken
+          );
+          if (profileData.data && profileData.data.success) {
+            dispatch(setUserProfile(profileData.data.freelancer));
+            navigate("/");
+          }
+        }else if(res.data.user.userType === "CLIENT"){
+          const profileData = await getClientProfileByUserID(
+            res.data.user.id,
+            res.data.accessToken
+          );
+          if (profileData.data && profileData.data.success) {
+            dispatch(setUserProfile(profileData.data.client));
+            navigate("/");
+          }
+        }
       } else {
         setLoading(false);
         setError(res.message || "Failed to log in.");

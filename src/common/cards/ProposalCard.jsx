@@ -35,7 +35,7 @@ export default function ProposalCard({ proposal, key , fetchProposals }) {
           />
         </div>
         <SecondaryButton
-          children={`Download File`}
+          children={`Download Cover Letter`}
           onClick={() => handleDownload(proposal.coverLetter)}
         />
       </div>

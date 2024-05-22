@@ -12,6 +12,8 @@ export const profileSlice = createSlice({
     reducers: {
 
         setUserProfile : (state, action) => {
+
+            console.log('SetUserProfileCalled!', action.payload)
             state.userProfile = action.payload
 
         },
