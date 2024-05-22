@@ -5,6 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { submitProposal } from "../services/jobs.services";
 import { useAuthToken } from "../hooks/useAuth";
 import imageUrls from "../constants/imageurls";
+import CurrencyInput from "../common/CurrencyInput";
+import toast  from 'react-hot-toast';
 
 const ProposalForm = () => {
   const { jobId } = useParams();
@@ -31,6 +33,12 @@ const ProposalForm = () => {
         [name]: value,
       }));
     }
+  };
+
+  const [currency, setCurrency] = useState("INR");
+
+  const handleCurrencyChange = (e) => {
+    setCurrency(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -65,19 +73,23 @@ const ProposalForm = () => {
           coverLetter: null,
         });
 
-        navigate("/");
+        toast.success('Proposal Submitted Successfully!')
       } else {
         setLoading(false);
         setError(res.message || "Failed to create proposal.");
+        toast('Error in submitting proposal')
       }
     } catch (error) {
       setLoading(false);
       setError("An error occurred while creating proposal.");
       console.error("Error creating proposal:", error);
+      toast.error('Error in submitting proposal')
     }
   };
 
   return (
+   
+  
     <form className="w-full  rounded-xl py-4 px-3">
       <div className="mb-4">
         <label
@@ -107,21 +119,22 @@ const ProposalForm = () => {
               htmlFor="charges"
               className="block text-primary-black  font-medium"
             >
-              Total price of project
+              Total Quote for the project
             </label>
             <p className="text-sm text-[#9a9898]">
               This includes all milestones, and is the amount your client will
               see
             </p>
-            <input
-              type="number"
+            
+            <CurrencyInput
+              placeholder="Enter amount"
+              selectedCurrency={currency}
+              currencies={["USD", "EUR", "GBP", "INR"]}
+              onCurrencyChange={handleCurrencyChange}
               id="charges"
               name="charges"
               value={formData.charges}
               onChange={handleChange}
-              className="shadow my-2 bg-transparent border-b placeholder:text-lg appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="$ 0.00"
-              required
             />
           </div>
 
@@ -141,14 +154,13 @@ const ProposalForm = () => {
               required
             />
             <div className="mt-10">
-
-            <PrimaryButton
-              onClick={handleSubmit}
-              children="Confirm & Submit"
-              loading={isLoading}
-              widthFull={true}
+              <PrimaryButton
+                onClick={handleSubmit}
+                children="Confirm & Submit"
+                loading={isLoading}
+                widthFull={true}
               />
-              </div>
+            </div>
           </div>
         </div>
 
@@ -159,6 +171,7 @@ const ProposalForm = () => {
 
       {error && <p className="mb-4 text-red-600">{error}</p>}
     </form>
+    
   );
 };
 

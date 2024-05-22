@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/slices/Authslice";
 import imageUrls from "../constants/imageurls";
 import { setUserProfile } from "../redux/slices/profileSlice";
+import ToolTip from "./ToolTip/ToolTip";
 
 const drawerWidth = 240;
 const navItems = [
@@ -133,6 +134,8 @@ function DrawerAppBar(props) {
               />
             </Box>
           </Typography>
+
+        
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <List
               sx={{
@@ -168,6 +171,7 @@ function DrawerAppBar(props) {
                   />
                 </ListItemButton>
               ))}
+              <ToolTip />
             </List>
           </Box>
         </Toolbar>

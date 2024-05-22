@@ -12,7 +12,7 @@ import PrimaryButton from "../PrimaryButton";
 import { updateProposals } from "../../services/jobs.services";
 import { useState } from "react";
 import { useAuthToken } from "../../hooks/useAuth";
-
+import toast  from 'react-hot-toast';
 const theme = createTheme({
   components: {
     MuiSelect: {
@@ -70,17 +70,19 @@ export default function ModalContent({ open, handleClose, proposal , fetchPropos
         
         console.log("Proposal Created: ", res.data);
        await  fetchProposals()
-
+        toast.success('Status Updated SuccessFully !')
         setLoading(false);
         setError(null);
       } else {
         setLoading(false);
-        setError(res.message || "Failed to create proposal.");
+        setError(res.message || "Failed to updated proposal.");
+       
       }
     } catch (error) {
       setLoading(false);
       setError("An error occurred while creating proposal.");
       console.error("Error creating proposal:", error);
+      toast.error('An error occurred while creating proposal')
     }
   };
 

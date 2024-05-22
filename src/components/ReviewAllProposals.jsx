@@ -3,7 +3,7 @@ import { useAuthToken, useClient } from "../hooks/useAuth";
 import { reviewProposals } from "../services/jobs.services";
 import { useParams } from "react-router-dom";
 import ProposalCard from "../common/cards/ProposalCard";
-
+import toast  from 'react-hot-toast';
 const ReviewAllProposals = () => {
   const [proposals, setProposals] = useState([]);
   const [totalProposals, setTotalProposals] = useState(0);
