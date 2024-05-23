@@ -7,6 +7,7 @@ import { setUser, setToken, setUserType } from "../redux/slices/Authslice";
 import PrimaryButton from "../common/PrimaryButton";
 import { getClientProfileByUserID, getFreelancerProfileByUserID } from "../services/profile.services";
 import { setUserProfile } from "../redux/slices/profileSlice";
+import imageUrls from "../constants/imageurls";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -77,8 +78,11 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <form className=" mt-8">
+    <div className="min-h-screen  p-5 flex flex-col sm:flex-row items-center justify-around ">
+    <div className="p-4">
+      <img src={imageUrls.signup} alt="login"  />
+    </div>
+      <form className=" mt-8 sm:mr-5">
         <div className="mb-4">
           <h1 className=" my-6 text-3xl  font-medium text-[#00B386]">
             {userType === "CLIENT"

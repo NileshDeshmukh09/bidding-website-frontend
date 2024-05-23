@@ -8,6 +8,7 @@ const imageUrls = {
     profileScreen : "/images/profileScreen.svg",
     client : "/images/client.svg",
     freelancer : "/images/freelancer.svg",
+    signup : "/images/signup.svg",
    
   };
   

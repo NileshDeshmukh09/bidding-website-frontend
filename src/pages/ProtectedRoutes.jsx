@@ -16,7 +16,7 @@ const FrontendHome = () => {
   const isCreateProfileWelcome = location.pathname === "/create-profile/welcome";
 
   return (
-    <div className="flex gap-y-16 flex-col min-h-screen">
+    <div className="flex gap-y-16 flex-col font-rubik  min-h-screen">
       { !isCreateProfileWelcome && <AppBar/>}
       
       <Outlet />

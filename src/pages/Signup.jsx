@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../common/Loading";
 import { setUser, setToken } from "../redux/slices/Authslice";
 import PrimaryButton from "../common/PrimaryButton";
+import imageUrls from "../constants/imageurls";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -91,8 +92,11 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <form className=" w-3/5 p-8 mt-8" onSubmit={handleSubmit}>
+    <div className="min-h-screen  pt-5 flex flex-col sm:flex-row items-center justify-center">
+      <div className="p-4">
+        <img src={imageUrls.signup} alt="signup"  />
+      </div>
+      <form className=" w-11/12 sm:w-3/5 p-8 mt-8"  onSubmit={handleSubmit}>
         <h1 className="my-6 text-3xl font-medium text-[#00B386]">
           {userType === "CLIENT"
             ? "Signup to hire talent"

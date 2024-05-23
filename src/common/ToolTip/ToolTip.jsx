@@ -12,10 +12,13 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useSelector } from 'react-redux';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  const userType = useSelector( state => state.user.userType) 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -73,7 +76,8 @@ export default function AccountMenu() {
         }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
+      > 
+      <p className='text-center text-primary-grey font-medium'>{userType}</p>
         <MenuItem onClick={handleClose}>
           <Avatar /> Profile
         </MenuItem>

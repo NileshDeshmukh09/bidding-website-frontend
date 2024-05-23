@@ -39,7 +39,7 @@ function DrawerAppBar(props) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" , fontFamily : "Rubik" }}> 
       <Box
         sx={{ my: 2, mx: 2, cursor: "pointer" }}
         onClick={() => {
@@ -89,11 +89,12 @@ function DrawerAppBar(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box  sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
         component="nav"
         position="fixed"
+       
         sx={{
           padding : "0px 80px",
           boxShadow: "none",
@@ -142,11 +143,13 @@ function DrawerAppBar(props) {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                fontFamily : "Rubik"
               }}
             >
               {navItems.map((item) => (
                 <ListItemButton
                   key={item.name}
+                
                   onClick={() => {
                     if (item.name === "Logout") {
                       dispatch(setUserProfile(null));
@@ -162,7 +165,7 @@ function DrawerAppBar(props) {
                     sx={{
                       fontSize: "16px",
                       fontWeight: "400",
-
+                      fontFamily : "Rubik",
                       color: `${
                         navigate.pathname === item.path ? "#FFD60C" : "#1D1D1D"
                       }`,
