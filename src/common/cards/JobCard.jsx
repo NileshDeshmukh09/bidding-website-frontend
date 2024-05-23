@@ -8,7 +8,6 @@ const JobCard = ({ job }) => {
   const userType = useSelector((state) => state.user.userType);
   const navigate = useNavigate();
 
-
   const handleCreateProposal = () => {
     navigate(`/jobs/${job.id}/create-proposal`, { state: { job } });
   };
@@ -39,11 +38,10 @@ const JobCard = ({ job }) => {
         <p className="mr-2">{job.projectScope}</p>
       </div>
       <div className="mt-3">
-
-      <p className="font-bold">Description :</p>
-      <p className="mb-4  text-sm text-[#717171] font-normal overflow-hidden line-clamp-4">
-        {job.description}
-      </p>
+        <p className="font-bold">Description :</p>
+        <p className="mb-4  text-sm text-[#717171] font-normal overflow-hidden line-clamp-4">
+          {job.description}
+        </p>
       </div>
       <div>
         <p className="font-bold">Skills:</p>
@@ -60,14 +58,14 @@ const JobCard = ({ job }) => {
       </div>
 
       <div className="flex justify-between m-2">
-
         <p className="font-bold">
-            <span className="font-medium">Budget:</span> ₹ {job.budget}/hr
+          <span className="font-medium">Budget:</span> ₹ {job.budget}/hr
         </p>
-        <p className=" font-medium text-primary-black">
-         <span className="font-bold">
-         {job.Proposals.length}
-          </span>  bids</p>
+        {userType === "CLIENT" && job.Proposals && job.Proposals.length > 0 && (
+          <p className=" font-medium text-primary-black">
+            {<span className="font-bold">{job.Proposals.length}</span>} bids
+          </p>
+        )}
       </div>
       {userType === "FREELANCER" && (
         <div>
@@ -81,8 +79,11 @@ const JobCard = ({ job }) => {
 
       {userType === "CLIENT" && (
         <div>
-          <PrimaryButton children={`Review proposals`} widthFull={true} onClick={handleReviewProposals} />
-        
+          <PrimaryButton
+            children={`Review proposals`}
+            widthFull={true}
+            onClick={handleReviewProposals}
+          />
         </div>
       )}
     </div>
