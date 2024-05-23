@@ -33,13 +33,14 @@ export const getJobsByClient = async ( { clientId, token} ) => {
 
 /** FREELANCER */
 
-export const getAllJobs = async ( { token} ) => {
+export const getAllJobs = async ( { token, page, limit , experience  }) => {
   try {
  
     const response = await axiosInstance.get(`/jobs`, {
       headers: {
         'x-access-token': token, 
       },
+      params: { page, limit ,experience },
     });
     return response;
   } catch (error) {
