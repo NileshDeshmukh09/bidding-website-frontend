@@ -135,7 +135,7 @@ const ClientForm = () => {
               value={formData.skills.join(", ")} // Join skills array with comma and space
               onChange={handleChange}
               className="border border-primary-grey2 placeholder:text-primary-black  placeholder:text-xl rounded-lg sm:w-full py-2 px-4"
-              placeholder="Skills"
+              placeholder="Enter , seperated Skills ( Ex : React , JS ) "
             />
           </div>
           <div className="mb-4">

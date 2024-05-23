@@ -19,6 +19,7 @@ export default function AccountMenu() {
   const open = Boolean(anchorEl);
 
   const userType = useSelector( state => state.user.userType) 
+  const user = useSelector(state => state.user.user);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -37,7 +38,7 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 40, height: 40 , padding : 1 , bgcolor : "#00B386"}}>ND</Avatar> 
+            <Avatar className='uppercase' sx={{ width: 40, height: 40 , padding : 1 , bgcolor : "#00B386" , }}>{user.username.split(' ').map(name => name[0]).join('')}</Avatar> 
             <ExpandMoreIcon />
           </IconButton> 
         </Tooltip>
