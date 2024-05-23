@@ -7,6 +7,7 @@ import FeatureItem from "../../components/FeatureItem";
 import PrimaryButton from "../../common/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../common/Loading";
+import imageUrls from "../../constants/imageurls";
 
 const featureItem = [
   {
@@ -66,7 +67,8 @@ const CreateProfile = () => {
       <div className=" sm:w-1/3 flex items-center">
         <div className=" rounded-lg  bg-[#efefef]">
           <img
-            src="https://zerodha.com/static/images/ecosystem.png"
+            // src="https://zerodha.com/static/images/ecosystem.png"
+            src={imageUrls.profileScreen}
             alt=""
             className="h-full rounded-lg"
           />

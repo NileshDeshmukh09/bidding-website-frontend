@@ -3,6 +3,7 @@ import React , { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { setUserType } from "../redux/slices/Authslice";
 import PrimaryButton from "../common/PrimaryButton";
+import imageUrls from "../constants/imageurls";
 
 const SignupLanding = () => {
   const userType = useSelector((state) => state.user.userType);
@@ -29,15 +30,22 @@ const SignupLanding = () => {
         Join as a Client or Freelancer
       </h1>
 
-      <div id="userType" className="flex justify-between sm:w-1/2 gap-4">
+      <div id="userType" className="flex justify-between sm:w-4/5 gap-4">
         <div
-          className={` py-8 px-5 rounded-2xl border ${
+          className={`flex shadow  gap-4 py-8 px-5 rounded-2xl border ${
             userType === "CLIENT"
               ? "border-[#00B386] text-[#00B386] border-2"
               : "border-black-500 text-black-500"
           }`}
           onClick={() => handleUserTypeChange("CLIENT")}
         >
+
+          <div>
+            <img src={imageUrls.client} alt="client" />
+          </div>
+          <div>
+
+       
           <div className="my-1 flex justify-between items-center">
             <p className="font-bold text-3xl">Client</p>
             <input
@@ -49,16 +57,25 @@ const SignupLanding = () => {
             />
           </div>
           <p className="mt-5">I'm Client hiring for a project</p>
+          </div>
         </div>
 
         <div
-          className={` py-8 px-5 rounded-2xl border ${
+          className={`flex shadow gap-4 py-8 px-5 rounded-2xl border ${
             userType === "FREELANCER"
               ? "border-[#00B386] text-[#00B386] border-2"
               : "border-black-500 text-black-500"
           }`}
           onClick={() => handleUserTypeChange("FREELANCER")}
         >
+
+          <div>
+            <img src={imageUrls.freelancer} alt="freelancer" />
+          </div>
+
+          <div>
+
+          
           <div className="my-1 flex justify-between items-center">
             <p className="font-bold text-3xl">Freelancer</p>
             <input
@@ -70,6 +87,7 @@ const SignupLanding = () => {
             />
           </div>
           <p className="mt-5">I'm Freelancer looking for a work</p>
+          </div>
         </div>
       </div>
 

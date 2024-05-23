@@ -34,9 +34,9 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 40, height: 40 , bgcolor : "#00B386"}}>ND</Avatar> 
+            <Avatar sx={{ width: 40, height: 40 , padding : 1 , bgcolor : "#00B386"}}>ND</Avatar> 
             <ExpandMoreIcon />
-          </IconButton>
+          </IconButton> 
         </Tooltip>
       </Box>
       <Menu
